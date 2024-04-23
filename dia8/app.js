@@ -32,16 +32,16 @@ function Search(id) {
     })
     .then(data => {
         hogar(data.homeworld, data.url, data.species);
-        let base = `<p class="h2">Nombre: ${data.name}</p><br>
-        <p class="h2">Cumpleaños: ${data.birth_year}</p><br>
-        <p class="h2">Color de ojos ${data.eye_color}</p><br>
-        <p class="h2">Genero: ${data.gender}</p><br>
-        <p class="h2">Color de cabello: ${data.hair_color}</p><br>
-        <p class="h2">Altura: ${data.height}</p><br>
-        <p class="h2">Peso Kg: ${data.mass}</p><br>
-        <p class="h2">Color de piel: ${data.skin_color}</p><br>
-        <p class="h2">Creado: ${data.created}</p><br>
-        <p class="h2">Editado: ${data.edited}</p><br>`;
+        let base = `<div><p class="h2">Nombre: ${data.name}</p><br></div>
+        <div><p class="h2">Cumpleaños: ${data.birth_year}</p><br></div>
+        <div><p class="h2">Color de ojos ${data.eye_color}</p><br></div>
+        <div><p class="h2">Genero: ${data.gender}</p><br></div>
+        <div><p class="h2">Color de cabello: ${data.hair_color}</p><br></div>
+        <div><p class="h2">Altura: ${data.height}</p><br></div>
+        <div><p class="h2">Peso Kg: ${data.mass}</p><br></div>
+        <div><p class="h2">Color de piel: ${data.skin_color}</p><br></div>
+        <div><p class="h2">Creado: ${data.created}</p><br></div>
+        <div><p class="h2">Editado: ${data.edited}</p><br></div>`;
         let cont = document.getElementById('contenedor');
         cont.innerHTML = base;
 
