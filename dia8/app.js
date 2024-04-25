@@ -21,6 +21,19 @@ function hogar(hogar, url, especies) {
     });
 }
 }
+function SearchArray(array) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].length > 0) {
+            array[i].forEach(vehicleUrl => {
+                fetch(vehicleUrl)
+                    .then(response => response.json())
+                    .then(vehicleData => {
+                        console.log(vehicleData.name);
+                    });
+            });
+        }  
+    }
+}
 function Search(id) {
     let url = `https://swapi.py4e.com/api/people/${id}/`;
     fetch(url)
@@ -32,6 +45,7 @@ function Search(id) {
     })
     .then(data => {
         hogar(data.homeworld, data.url, data.species);
+        SearchArray([data.vehicles,data.starships,data.films]);
         let base = `<div><p class="h2">Nombre: ${data.name}</p><br></div>
         <div><p class="h2">Cumpleaños: ${data.birth_year}</p><br></div>
         <div><p class="h2">Color de ojos ${data.eye_color}</p><br></div>
