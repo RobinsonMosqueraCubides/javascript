@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    
+}
+h1 {
+    font-size: 2.5rem;
+    color: black;
+}
+
+h2 {
+    font-size: 2.2rem;
+    color: black;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: black;
+}
+body {
+    background-image: linear-gradient(to bottom, #87CEEB, #FFFFFF);
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(../storage/image/pokedex.png);
+    background-size: 400px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.7); /* Agrega un fondo semi-transparente */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.search,
+.btnNexPrev {
+    margin-top: 20px;
+}
+

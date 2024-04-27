@@ -3,16 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="js/app.js" defer></script>
+    <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
 <body>
     <main>
-        <input type="text" id="input">
-        <button type="button" id="btnBuscar">Enviar</button>
-        <div id="name"></div>
-        <div id="pokeId"></div>
-        <img src="" alt="" id="animated">
+        <article class="container">
+            <figure>
+                <img src="" alt="" id="animated">
+                <figcaption>
+                    <h3 class="idName">
+                        <div id="name"></div>
+                        <div id="pokeId"></div>
+                    </h3>
+                </figcaption>
+            </figure>
+            <section class="search">
+                <input type="text" id="input">
+                <button type="button" id="btnBuscar">Enviar</button>
+            </section>
+            <section class="btnNexPrev">
+                <button id="next">Next</button>
+                <button id="prev">Prev</button>
+            </section>
+        </article>
     </main>
-    <script type="module" src="js/app.js"></script>
 </body>
 </html>
