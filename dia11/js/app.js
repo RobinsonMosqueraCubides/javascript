@@ -6,13 +6,15 @@ function writeData(name, id, animated) {
     divId.textContent = id;
     divImg.setAttribute('src', animated);
 }
-function getDataPokedex(data) {
+async function getDataPokedex(data) {
     let URL = `https://pokeapi.co/api/v2/pokemon/${data}`;
-    fetch(URL)
-    .then(response => response.json())
-    .then(data => {
-        writeData(data.name, data.id,data.sprites.versions['generation-v']['black-white'].animated.front_default)
-    })
+    try {
+        const response = await fetch(URL);
+        const responseData = await response.json();
+        writeData(responseData.name, responseData.id, responseData.sprites.versions['generation-v']['black-white'].animated.front_default);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
 }
 let btn = document.getElementById('btnBuscar');
 btn.addEventListener('click', () => {
