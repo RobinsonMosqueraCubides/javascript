@@ -20,3 +20,21 @@ let btn = document.getElementById('btnBuscar');
 btn.addEventListener('click', () => {
     getDataPokedex(document.getElementById('input').value);
 });
+document.addEventListener('DOMContentLoaded', async () => {
+    await getDataPokedex('bulbasaur');
+});
+let btnNext = document.getElementById('nextButton');
+
+btnNext.addEventListener('click', () => {
+    let pokeIdText =document.getElementById('pokeId').textContent;
+    let pokeId = parseInt(pokeIdText) + 1;
+    getDataPokedex(pokeId);
+});
+
+let btnPrev = document.getElementById('prevButton');
+
+btnPrev.addEventListener('click', () => {
+    let pokeIdText =document.getElementById('pokeId').textContent;
+    let pokeId = parseInt(pokeIdText) - 1;
+    getDataPokedex(pokeId);
+});
