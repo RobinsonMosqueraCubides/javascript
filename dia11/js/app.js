@@ -1,4 +1,15 @@
+async function help(data) {
+    let URL = `https://pokeapi.co/api/v2/pokemon/${data}`;
+    try {
+        const response = await fetch(URL);
+        const responseData = await response.json();
+        writeData(responseData.name, responseData.id, responseData.sprites.versions['generation-v']['black-white'].front_default);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
 function writeData(name, id, animated) {
+    if (animated === null) help(id);
     let divName = document.getElementById('name');
     let divId = document.getElementById('pokeId');
     let divImg = document.getElementById('animated');
