@@ -19,9 +19,15 @@ function playerLoss(){
     document.getElementById('hit').disabled=true;
     document.getElementById('stay').disabled=true;
 }
-function getPlayerScore(valueCard1, valueCard2=0) {
-    playerScore += (isNaN(valueCard1) ? 10 : parseInt(valueCard1)) + (isNaN(valueCard2) ? 10 : parseInt(valueCard2));
-    document.getElementById('playerScore').textContent = playerScore;
+function getScore(valueCard1, valueCard2=0, flag = true) {
+    if (flag) {
+        playerScore += (isNaN(valueCard1) ? 10 : parseInt(valueCard1)) + (isNaN(valueCard2) ? 10 : parseInt(valueCard2));
+        document.getElementById('playerScore').textContent = playerScore;
+    }
+    else {
+        comScore += (isNaN(valueCard1) ? 10 : parseInt(valueCard1)) + (isNaN(valueCard2) ? 10 : parseInt(valueCard2));
+        console.log(comScore);
+    }
     if (playerScore > 21) {
         playerLoss();
     }
@@ -30,8 +36,33 @@ function getPlayerScore(valueCard1, valueCard2=0) {
     }
 }
 function updateCom(deck){
-    document.getElementById('card3').src = deck[0].image;
-    document.getElementById('card4').src = deck[1].image;
+    let flags = false;
+    const comCards = document.querySelectorAll('img.comCards');
+    if (comCards.length >= 2) {
+        let newCard = document.createElement('img');
+        newCard.src = deck[0].image;
+        newCard.alt = "";
+        newCard.id = `card${comCards.length + 1}`;
+        newCard.classList.add('comCards');
+        document.querySelector('.comContcards').appendChild(newCard);
+        getScore(deck[0].value, 0, flags);
+    }
+    else {
+        let newCard = document.createElement('img');
+        newCard.src = deck[0].image;
+        newCard.alt = "";
+        newCard.id = `card${comCards.length + 1}`;
+        newCard.classList.add('comCards');
+        document.querySelector('.comContcards').appendChild(newCard);
+        let newCard2 = document.createElement('img');
+        newCard2.src = deck[1].image;
+        newCard2.alt = "";
+        newCard2.id = `card${comCards.length + 2}`;
+        newCard2.classList.add('comCards');
+        document.querySelector('.comContcards').appendChild(newCard2);
+        getScore(deck[0].value, deck[1].value, flags);
+    }
+    document.getElementById('card1').style.display = 'none';
 }
 function updatePlayer(deck) {
     const playerCards = document.querySelectorAll('img.playerCards');
@@ -42,7 +73,7 @@ function updatePlayer(deck) {
         newCard.id = `card${playerCards.length + 1}`;
         newCard.classList.add('playerCards');
         document.querySelector('.playerContCards').appendChild(newCard);
-        getPlayerScore(deck[0].value);
+        getScore(deck[0].value);
     }
     else {
         let newCard = document.createElement('img');
@@ -57,12 +88,11 @@ function updatePlayer(deck) {
         newCard2.id = `card${playerCards.length + 2}`;
         newCard2.classList.add('playerCards');
         document.querySelector('.playerContCards').appendChild(newCard2);
-        getPlayerScore(deck[0].value, deck[1].value);
+        getScore(deck[0].value, deck[1].value);
     }
 }
 
-function getCards(id, flag) {
-    if (!flag) {
+function getCards(id) {
     id.forEach((deckId, index) => {
         let url = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`;
         fetch(url)
@@ -72,20 +102,9 @@ function getCards(id, flag) {
                 else if (index === 1) updateCom(data.cards);
             })
             .catch(error => console.error('Hubo un error en la solicitud:', error));
-    });}
-    else{
-        id.forEach((deckId, index) => {
-            let url = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    if (index === 0) updateCom(data.cards);
-                })
-                .catch(error => console.error('Hubo un error en la solicitud:', error));
-        });
-    }
+    });
 }
-function getIdDeck(urls, flag = false) {
+function getIdDeck(urls) {
     let promises = urls.map(url =>
         fetch(url)
             .then(response => response.json())
@@ -93,7 +112,7 @@ function getIdDeck(urls, flag = false) {
     );
 
     Promise.all(promises)
-        .then(array => getCards(array, flag))
+        .then(array => getCards(array))
         .catch(error => console.error('Hubo un error en la solicitud:', error));
 }
 document.addEventListener('DOMContentLoaded', () =>{
@@ -108,9 +127,4 @@ btnDrop.addEventListener('click', () => {
     const urls = [`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${numRandom1}`]
     getIdDeck(urls);
 });
-let btnStay = document.getElementById('stay');
-btnStay.addEventListener('click', () => {
-    let numRandom1 = Math.floor(Math.random() *10) + 1;
-    const urls = [`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${numRandom1}`]
-    getIdDeck(urls, flag = true);
-});
+
