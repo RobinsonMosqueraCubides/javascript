@@ -8,6 +8,7 @@ function playerWin() {
     document.getElementById('playerScore').textContent = 'You Win';
     document.getElementById('hit').disabled=true;
     document.getElementById('stay').disabled=true;
+    document.getElementById('comScore').textContent = comScore;
 }
 function playerLoss(){
     document.getElementById('playerScore').style.color ='red';
@@ -18,6 +19,7 @@ function playerLoss(){
     document.getElementById('playerScore').textContent = 'You Loss';
     document.getElementById('hit').disabled=true;
     document.getElementById('stay').disabled=true;
+    document.getElementById('comScore').textContent = comScore;
 }
 function getScore(valueCard1, valueCard2=0, flag = true) {
     if (flag) {
@@ -128,7 +130,7 @@ btnDrop.addEventListener('click', () => {
     getIdDeck(urls);
 });
 function getCardsCom(id) {
-    if(comScore<21){
+    if(comScore<21 && comScore<playerScore){
         let url = `https://deckofcardsapi.com/api/deck/${id}/draw/?count=1`;
         fetch(url)
             .then(response => response.json())
@@ -159,4 +161,7 @@ btnStay.addEventListener('click', () => {
     document.getElementById('cardCom1').style.display = 'block';
     getIdDeckCom();
 });
-
+let btnReset = document.getElementById('reset');
+btnReset.addEventListener('click', () => {
+    location.reload();
+});

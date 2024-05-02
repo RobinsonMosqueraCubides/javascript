@@ -14,7 +14,7 @@ main {
 .container {
     display: flex;
     justify-content: space-around;
-    width: 80%;
+    width: 100%;
 }
 
 .player,
@@ -56,6 +56,23 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+.btnReset{
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.reset {
+    background-color: #dc3545;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+}
+
+.reset:hover {
+    background-color: #bd2130;
+}
 main .container .com .comContcards img{
     width: 100px;
 }
@@ -68,7 +85,7 @@ main .container .com .comContcards{
 main .container .player .playerContCards img{
     width: 100px;
 }
-main .container .com .playerContCards{
+main .container .player .playerContCards{
     display: flex;
     justify-content: space-around;
     align-items: center;
