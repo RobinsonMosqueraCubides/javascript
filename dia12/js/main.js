@@ -42,7 +42,7 @@ function updateCom(deck){
         let newCard = document.createElement('img');
         newCard.src = deck[0].image;
         newCard.alt = "";
-        newCard.id = `card${comCards.length + 1}`;
+        newCard.id = `cardCom${comCards.length + 1}`;
         newCard.classList.add('comCards');
         document.querySelector('.comContcards').appendChild(newCard);
         getScore(deck[0].value, 0, flags);
@@ -51,18 +51,18 @@ function updateCom(deck){
         let newCard = document.createElement('img');
         newCard.src = deck[0].image;
         newCard.alt = "";
-        newCard.id = `card${comCards.length + 1}`;
+        newCard.id = `cardCom${comCards.length + 1}`;
         newCard.classList.add('comCards');
         document.querySelector('.comContcards').appendChild(newCard);
         let newCard2 = document.createElement('img');
         newCard2.src = deck[1].image;
         newCard2.alt = "";
-        newCard2.id = `card${comCards.length + 2}`;
+        newCard2.id = `cardCom${comCards.length + 2}`;
         newCard2.classList.add('comCards');
         document.querySelector('.comContcards').appendChild(newCard2);
         getScore(deck[0].value, deck[1].value, flags);
+        document.getElementById('cardCom1').style.display = 'none';
     }
-    document.getElementById('card1').style.display = 'none';
 }
 function updatePlayer(deck) {
     const playerCards = document.querySelectorAll('img.playerCards');
@@ -126,5 +126,37 @@ btnDrop.addEventListener('click', () => {
     let numRandom1 = Math.floor(Math.random() *10) + 1;
     const urls = [`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${numRandom1}`]
     getIdDeck(urls);
+});
+function getCardsCom(id) {
+    if(comScore<21){
+        let url = `https://deckofcardsapi.com/api/deck/${id}/draw/?count=1`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                updateCom(data.cards);
+                getIdDeckCom();
+            })
+            .catch(error => console.error('Hubo un error en la solicitud:', error));
+    }
+    else if (comScore>21) playerWin();
+    else if (comScore >= playerScore) playerLoss();
+}
+function getIdDeckCom(){
+    let numRandom1 = Math.floor(Math.random() *10) + 1;
+    const urls = [`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${numRandom1}`]
+    let promises = urls.map(url =>
+        fetch(url)
+            .then(response => response.json())
+            .then(({ deck_id }) => deck_id)
+    );
+
+    Promise.all(promises)
+        .then(array => getCardsCom(array))
+        .catch(error => console.error('Hubo un error en la solicitud:', error));
+}
+let btnStay = document.getElementById('stay');
+btnStay.addEventListener('click', () => {
+    document.getElementById('cardCom1').style.display = 'block';
+    getIdDeckCom();
 });
 
