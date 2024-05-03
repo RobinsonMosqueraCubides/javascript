@@ -39,6 +39,22 @@ function editInformation(nameHereo) {
         }
     });
 }
+function search() {
+    dataJson.forEach((data, index)=>{
+        if (data.nameHero === document.getElementById('nameHereo').value) {
+            document.getElementById('nameActor').disnabled = true;
+            document.getElementById('ageActor').disnabled = true;
+            document.getElementById('textUbication').disnabled = true;
+            document.getElementById('poster').disnabled = true;
+            document.getElementById('dateUbication').disnabled = true;
+            document.getElementById('productora').disnabled = true;
+
+        }
+        else{
+            alert('Not found');
+        }
+    });
+}
 let btnSave = document.getElementById('saveHereo');
 btnSave.addEventListener('click', () => {
     getInformation();
@@ -51,6 +67,14 @@ let btnEdit = document.getElementById('edit');
 btnEdit.addEventListener('click', () => {
     editInformation(document.getElementById('nameHereo').value);
 });
+let btnSearch = document.getElementById('search');
+btnSearch.addEventListener('click', () => {
+    search();
+});
+let btnNewHereo = document.getElementById('newHereo');
+btnNewHereo.addEventListener('click', () => {
+    search();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('nameActor').disnabled = false;
@@ -59,5 +83,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('poster').disnabled = false;
     document.getElementById('dateUbication').disnabled = false;
     document.getElementById('productora').disnabled = false;
-    
+
 })
