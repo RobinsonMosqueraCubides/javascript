@@ -39,9 +39,8 @@ function editInformation(nameHereo) {
         }
     });
 }
-function search() {
-    dataJson.forEach((data, index)=>{
-        if (data.nameHero === document.getElementById('nameHereo').value) {
+function search(flag=false) {
+    if(flag){
             document.getElementById('nameActor').disnabled = true;
             document.getElementById('ageActor').disnabled = true;
             document.getElementById('textUbication').disnabled = true;
@@ -49,11 +48,22 @@ function search() {
             document.getElementById('dateUbication').disnabled = true;
             document.getElementById('productora').disnabled = true;
 
+    }
+    else{
+        dataJson.forEach((data, index)=>{
+            if (data.nameHero === document.getElementById('nameHereo').value) {
+                document.getElementById('nameActor').disnabled = true;
+                document.getElementById('ageActor').disnabled = true;
+                document.getElementById('textUbication').disnabled = true;
+                document.getElementById('poster').disnabled = true;
+                document.getElementById('dateUbication').disnabled = true;
+                document.getElementById('productora').disnabled = true;
+
+            }
+            else{
+                alert('Not found');
+            }});
         }
-        else{
-            alert('Not found');
-        }
-    });
 }
 let btnSave = document.getElementById('saveHereo');
 btnSave.addEventListener('click', () => {
@@ -73,7 +83,8 @@ btnSearch.addEventListener('click', () => {
 });
 let btnNewHereo = document.getElementById('newHereo');
 btnNewHereo.addEventListener('click', () => {
-    search();
+    let flag = true;
+    search(flag);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
