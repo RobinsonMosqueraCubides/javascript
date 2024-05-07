@@ -21,39 +21,39 @@ async function getData(){
 
 }
 let btnName = document.getElementById('name');
-btnName.addEventListener('click', ()=>{
+btnName.addEventListener('mouseover', ()=>{
     setData(jsonData);
 });
 let btnEmail = document.getElementById('email');
-btnEmail.addEventListener('click', ()=>{
+btnEmail.addEventListener('mouseover', ()=>{
     let email = document.getElementById('title');
     let subtitle = document.getElementById('subTitle');
     subtitle.textContent = 'My email address is';
     email.textContent = jsonData.results[0].email;
 });
 let btnBirthday = document.getElementById('birthday');
-btnBirthday.addEventListener('click', ()=>{
+btnBirthday.addEventListener('mouseover', ()=>{
     let birthday = document.getElementById('title');
     let subtitle = document.getElementById('subTitle');
     subtitle.textContent = 'My birthday is';
     birthday.textContent = jsonData.results[0].dob.date;
 });
 let btnPhone = document.getElementById('phone');
-btnPhone.addEventListener('click', () => {
+btnPhone.addEventListener('mouseover', () => {
     let phone = document.getElementById('title');
     let subtitle = document.getElementById('subTitle');
     subtitle.textContent = 'My phone number is';
     phone.textContent = jsonData.results[0].phone;
 });
 let btnAddress = document.getElementById('address');
-btnAddress.addEventListener('click', () => {
+btnAddress.addEventListener('mouseover', () => {
     let address = document.getElementById('title');
     let subtitle = document.getElementById('subTitle');
     subtitle.textContent = 'My address is';
     address.textContent = `${jsonData.results[0].location.street.number} ${jsonData.results[0].location.street.name}, ${jsonData.results[0].location.city}, ${jsonData.results[0].location.state}, ${jsonData.results[0].location.postcode}`;
 });
 let pass = document.getElementById('pass');
-pass.addEventListener('click', () => {
+pass.addEventListener('mouseover', () => {
     let password = document.getElementById('title');
     let subtitle = document.getElementById('subTitle');
     subtitle.textContent = 'My password is';
