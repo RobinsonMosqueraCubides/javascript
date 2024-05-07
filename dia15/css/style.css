@@ -1,5 +1,6 @@
 i{
     font-size: 3rem;
+    color: gray;
 }
 h4{
     font-size: 1rem;
@@ -7,6 +8,9 @@ h4{
 }
 h2{
     font-size: 2rem;
+}
+i:hover{
+    color: greenyellow;
 }
 .container{
     display: flex;
