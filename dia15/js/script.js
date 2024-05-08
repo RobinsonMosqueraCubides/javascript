@@ -9,6 +9,10 @@ function setData(data) {
     subtitle.textContent = 'Hi, my name is';
     console.log(data.results[0]);
 }
+function writeData(data) {
+    let title = document.getElementById('title');
+    title.textContent = data
+}
 async function getData(){
     let URL = 'https://randomuser.me/api/?results=1';
     try {
@@ -26,37 +30,35 @@ btnName.addEventListener('mouseover', ()=>{
 });
 let btnEmail = document.getElementById('email');
 btnEmail.addEventListener('mouseover', ()=>{
-    let email = document.getElementById('title');
     let subtitle = document.getElementById('subTitle');
     subtitle.textContent = 'My email address is';
-    email.textContent = jsonData.results[0].email;
+    writeData(jsonData.results[0].email);
 });
 let btnBirthday = document.getElementById('birthday');
 btnBirthday.addEventListener('mouseover', ()=>{
-    let birthday = document.getElementById('title');
     let subtitle = document.getElementById('subTitle');
+    let dob = jsonData.results[0].dob.date;
+    dob = dob.slice(0, 10);
+    let Arraydob = dob.split('-');
     subtitle.textContent = 'My birthday is';
-    birthday.textContent = jsonData.results[0].dob.date;
+    writeData(`${Arraydob[1]}/${Arraydob[2]}/${Arraydob[0]}`);
 });
 let btnPhone = document.getElementById('phone');
 btnPhone.addEventListener('mouseover', () => {
-    let phone = document.getElementById('title');
     let subtitle = document.getElementById('subTitle');
     subtitle.textContent = 'My phone number is';
-    phone.textContent = jsonData.results[0].phone;
+    writeData(jsonData.results[0].phone);
 });
 let btnAddress = document.getElementById('address');
 btnAddress.addEventListener('mouseover', () => {
-    let address = document.getElementById('title');
     let subtitle = document.getElementById('subTitle');
     subtitle.textContent = 'My address is';
-    address.textContent = `${jsonData.results[0].location.street.number} ${jsonData.results[0].location.street.name}, ${jsonData.results[0].location.city}, ${jsonData.results[0].location.state}, ${jsonData.results[0].location.postcode}`;
+    writeData(`${jsonData.results[0].location.street.number} ${jsonData.results[0].location.street.name}`);
 });
 let pass = document.getElementById('pass');
 pass.addEventListener('mouseover', () => {
-    let password = document.getElementById('title');
     let subtitle = document.getElementById('subTitle');
     subtitle.textContent = 'My password is';
-    password.textContent = jsonData.results[0].login.password;
+    writeData(jsonData.results[0].login.password);
 });
 getData();
